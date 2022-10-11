@@ -1,8 +1,29 @@
 package twoout.miniweb.model;
 
-import lombok.Data;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
-@Data
+@Getter
+@Setter
+@ToString
+@NoArgsConstructor
+@RequiredArgsConstructor
+@AllArgsConstructor
 public class Member {
-	String memberID, memberPW, memberName, nickName, phone, email, zipcode, address, buliding, membership;
+	@NonNull
+	String memberID;
+	@NonNull
+	String memberPW;
+	String nickName;
+	String phone;
+	String email;
+	String zipcode;
+	String address;
+	String buliding;
+	String membership;
 }

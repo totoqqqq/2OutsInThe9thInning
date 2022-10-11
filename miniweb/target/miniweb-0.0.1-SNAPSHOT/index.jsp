@@ -1,5 +1,6 @@
-<html>
-<body>
-<h2>Hello World!</h2>
-</body>
-</html>
+<%@ page import="java.io.*"%>
+<script>
+let id =<%@(String)session.getAttribute("memberID");%>
+alert(id);
+$("#loginCheck").html(id+"님 환영합니다.");
+</script>
