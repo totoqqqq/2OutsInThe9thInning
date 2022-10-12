@@ -21,4 +21,14 @@
     <servlet-name>LoginCheck</servlet-name>
     <url-pattern>/LoginCheck</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>MembersView</display-name>
+    <servlet-name>MembersView</servlet-name>
+    <servlet-class>twoout.miniweb.servlet.MembersView</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>MembersView</servlet-name>
+    <url-pattern>/MembersView</url-pattern>
+  </servlet-mapping>
 </web-app>

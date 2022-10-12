@@ -2,13 +2,13 @@ package twoout.miniweb.dao;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 
 import twoout.miniweb.dto.Member;
 
 public class MemberDAO {
 	public static MemberDAO md=null;
 	private MemberDAO() {
-		
 	}
 	synchronized public static MemberDAO getMemberDAO() {
 		if(md==null)
@@ -46,5 +46,18 @@ public class MemberDAO {
 			e.printStackTrace();
 			return false;
 		}
+	}
+	synchronized public ArrayList<Member> MemberView(){
+		try(Connect con = new Connect();){
+			String sql="select * from member";
+			ResultSet rs=con.pstmt(sql).executeQuery();
+			ArrayList<Member> members = new ArrayList<Member>();
+			while(rs.next())
+				members.add(new Member(rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6),rs.getString(7),rs.getString(8),rs.getString(9)));
+			return members;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 }
