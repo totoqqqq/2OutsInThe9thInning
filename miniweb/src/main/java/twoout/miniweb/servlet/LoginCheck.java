@@ -9,7 +9,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import twoout.miniweb.dao.MemberDAO;
-import twoout.miniweb.model.Member;
+import twoout.miniweb.dto.Member;
 
 public class LoginCheck extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -17,11 +17,9 @@ public class LoginCheck extends HttpServlet {
         super();
     }
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.setContentType("text/html;charset=UTF-8");
 		HttpSession hs=request.getSession();
-		Member login = new MemberDAO().Login(new Member(request.getParameter("id"),request.getParameter("pw")));
+		Member login = MemberDAO.getMemberDAO().Login(new Member(request.getParameter("id"),request.getParameter("pw")));
 		if(login!=null) {
-//			response.getWriter().append("로그인 성공 ").append(login.getMemberID()+"님 환영합니다.");
 			hs.setAttribute("memberID", login.getMemberID());
 			hs.setAttribute("memberPW", login.getMemberID());
 			Cookie cid=new Cookie("id",login.getMemberID());
@@ -43,7 +41,6 @@ public class LoginCheck extends HttpServlet {
 		}
 	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.setContentType("text/html;charset=UTF-8");
 		doGet(request, response);
 	}
 }

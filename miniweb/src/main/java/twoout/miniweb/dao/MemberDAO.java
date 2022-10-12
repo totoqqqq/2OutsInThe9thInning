@@ -3,10 +3,19 @@ package twoout.miniweb.dao;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
-import twoout.miniweb.model.Member;
+import twoout.miniweb.dto.Member;
 
 public class MemberDAO {
-	public Member Login(Member account){
+	public static MemberDAO md=null;
+	private MemberDAO() {
+		
+	}
+	synchronized public static MemberDAO getMemberDAO() {
+		if(md==null)
+			md=new MemberDAO();
+		return md;
+	}
+	synchronized public Member Login(Member account){
 		try(Connect con=new Connect();){
 			String sql="select * from member where memberid='"+account.getMemberID()
 			+"'and memberpw='"+account.getMemberPW()+"'";
@@ -19,7 +28,7 @@ public class MemberDAO {
 		}
 		return null;
 	}
-	public boolean SignUp(Member account) {
+	synchronized public boolean SignUp(Member account) {
 		try(Connect con=new Connect();){
 			String sql="insert into member values(?,?,?,?,?,?,?,?,default)";
 			PreparedStatement signUp=con.pstmt(sql);

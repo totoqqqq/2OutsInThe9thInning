@@ -14,7 +14,7 @@ public class MemberDAO extends DefaultObjectFactory {
 //		if(sf==null)
 //			sf=Mybatis.getSqlSessionFactory();
 	}
-	synchronized public ArrayList<Member> LoginCheck(twoout.miniweb.model.Member member){
+	synchronized public ArrayList<Member> LoginCheck(twoout.miniweb.dto.Member member){
 		
 		return null;
 	}

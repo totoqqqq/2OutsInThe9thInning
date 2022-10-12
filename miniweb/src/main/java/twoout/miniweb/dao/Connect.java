@@ -15,7 +15,7 @@ public class Connect implements AutoCloseable{
 	private PreparedStatement ps;
 	private PoolDataSource pds;
 	Connect(){
-		try {//ups로 교체.
+		try {//UPS로 구현한 커넥션풀.
 			pds=PoolDataSourceFactory.getPoolDataSource();
 			pds.setConnectionFactoryClassName(DBdriver);
 			pds.setURL(DBURL);
@@ -27,7 +27,7 @@ public class Connect implements AutoCloseable{
 			pds.setMaxConnectionReuseTime(3600);
 			this.con=pds.getConnection();
 		} catch (SQLException e) {
-			System.out.println("오라클 호출 실패");
+//			System.out.println("오라클 호출 실패");
 			e.printStackTrace();
 		}
 	}
@@ -36,7 +36,7 @@ public class Connect implements AutoCloseable{
 			ps=this.con.prepareCall(sql);
 			return ps;
 		} catch (SQLException e) {
-			System.out.println("sql 구문 오류");
+//			System.out.println("sql 구문 오류");
 			e.printStackTrace();
 			return null;
 		}

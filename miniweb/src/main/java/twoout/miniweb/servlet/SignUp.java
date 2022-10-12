@@ -7,10 +7,9 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import twoout.miniweb.dao.MemberDAO;
-import twoout.miniweb.model.Member;
+import twoout.miniweb.dto.Member;
 
 import java.io.IOException;
-import java.net.URLEncoder;
 
 public class SignUp extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -18,12 +17,10 @@ public class SignUp extends HttpServlet {
         super();
     }
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// 서블릿 모듈 제작시 최상단에 utf-8선언 필수
-		response.setContentType("text/html;charset=UTF-8");
-		boolean signup = new MemberDAO().SignUp(new Member(request.getParameter("id"),request.getParameter("pw"),request.getParameter("name")
+		boolean signup = MemberDAO.getMemberDAO().SignUp(new Member(request.getParameter("id"),request.getParameter("pw"),request.getParameter("name")
 				,request.getParameter("phone"),request.getParameter("email"),request.getParameter("zipcode"),request.getParameter("address")
 				,request.getParameter("building"),null));
-//		
+//		동작 테스트용 쿠키생성코드
 //		String cok=new Member(request.getParameter("id"),request.getParameter("pw"),request.getParameter("name")
 //					,request.getParameter("phone"),request.getParameter("email"),request.getParameter("zipcode"),request.getParameter("address")
 //					,request.getParameter("building"),null).toString();
@@ -36,7 +33,6 @@ public class SignUp extends HttpServlet {
 	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.setContentType("text/html;charset=UTF-8");
 		doGet(request, response);
 	}
 

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import twoout.miniweb.model.Member;
+import twoout.miniweb.dto.Member;
 
 @Mapper
 public interface MemberMapper {
