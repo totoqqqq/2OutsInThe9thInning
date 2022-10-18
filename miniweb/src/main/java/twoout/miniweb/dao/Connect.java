@@ -1,49 +1,29 @@
 package twoout.miniweb.dao;
 
-
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-import oracle.ucp.jdbc.PoolDataSource;
-import oracle.ucp.jdbc.PoolDataSourceFactory;
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.sql.DataSource;
 
-public class Connect implements AutoCloseable{
-	private final String ID="xman", PW="xman";
-	private final String DBURL="jdbc:oracle:thin:@18.183.11.208:1521:xe",DBdriver="oracle.jdbc.driver.OracleDriver";
-	private Connection con;
-	private PreparedStatement ps;
-	private PoolDataSource pds;
-	Connect(){
-		try {//UPS로 구현한 커넥션풀.
-			pds=PoolDataSourceFactory.getPoolDataSource();
-			pds.setConnectionFactoryClassName(DBdriver);
-			pds.setURL(DBURL);
-			pds.setUser(ID);
-			pds.setPassword(PW);
-			pds.setInitialPoolSize(1);
-			pds.setMinPoolSize(1);
-			pds.setMaxPoolSize(80);
-			pds.setMaxConnectionReuseTime(3600);
-			this.con=pds.getConnection();
-		} catch (SQLException e) {
-//			System.out.println("오라클 호출 실패");
-			e.printStackTrace();
-		}
+public class Connect {
+	private static Context ctx=null;
+	private static DataSource ds=null;
+	private Connect() {
+
 	}
-	PreparedStatement pstmt(String sql) {
+	public static Connection getInstance() {
 		try {
-			ps=this.con.prepareCall(sql);
-			return ps;
-		} catch (SQLException e) {
-//			System.out.println("sql 구문 오류");
+			if(ds==null) {
+				ctx = new InitialContext();
+				ds = (DataSource) ctx.lookup("java:comp/env/jdbc/xman");
+			}
+			return ds.getConnection();
+		} catch (NamingException | SQLException e) {
 			e.printStackTrace();
-			return null;
 		}
-	}
-	@Override
-	public void close() throws Exception {
-		this.ps.close();
-		this.con.close();
+		return null;
 	}
 }

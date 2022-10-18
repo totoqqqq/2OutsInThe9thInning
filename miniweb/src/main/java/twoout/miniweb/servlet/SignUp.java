@@ -1,15 +1,13 @@
 package twoout.miniweb.servlet;
 
+import java.io.IOException;
+
 import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import twoout.miniweb.dao.MemberDAO;
 import twoout.miniweb.dto.Member;
-
-import java.io.IOException;
 
 public class SignUp extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -29,7 +27,7 @@ public class SignUp extends HttpServlet {
 		if(signup)
 			response.sendRedirect("/miniweb");
 		else
-			response.sendRedirect("/miniweb/signUp.html");
+			response.sendRedirect("/miniweb/signUp.jsp");
 	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub

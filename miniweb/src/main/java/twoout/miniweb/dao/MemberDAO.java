@@ -1,5 +1,6 @@
 package twoout.miniweb.dao;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -16,10 +17,9 @@ public class MemberDAO {
 		return md;
 	}
 	synchronized public Member Login(Member account){
-		try(Connect con=new Connect();){
-			String sql="select * from member where memberid='"+account.getMemberID()
-			+"'and memberpw='"+account.getMemberPW()+"'";
-			ResultSet rs=con.pstmt(sql).executeQuery();
+		String sql="select * from member where memberid='"+account.getMemberID()
+		+"'and memberpw='"+account.getMemberPW()+"'";
+		try(Connection con=Connect.getInstance();ResultSet rs=con.prepareStatement(sql).executeQuery();){
 			if(rs.next()==false)
 				return null;
 			return new Member(rs.getNString(1),rs.getString(2),rs.getNString(3),rs.getString(4),rs.getNString(5),rs.getString(6),rs.getNString(7),rs.getString(8),rs.getNString(9));
@@ -29,9 +29,9 @@ public class MemberDAO {
 		return null;
 	}
 	synchronized public boolean SignUp(Member account) {
-		try(Connect con=new Connect();){
+		try(Connection con=Connect.getInstance();){
 			String sql="insert into member values(?,?,?,?,?,?,?,?,default)";
-			PreparedStatement signUp=con.pstmt(sql);
+			PreparedStatement signUp=con.prepareStatement(sql);
 			signUp.setString(1, account.getMemberID());
 			signUp.setString(2, account.getMemberPW());
 			signUp.setString(3, account.getNickName());
@@ -48,9 +48,9 @@ public class MemberDAO {
 		}
 	}
 	synchronized public ArrayList<Member> MemberView(){
-		try(Connect con = new Connect();){
+		try(Connection con=Connect.getInstance();){
 			String sql="select * from member";
-			ResultSet rs=con.pstmt(sql).executeQuery();
+			ResultSet rs=con.prepareStatement(sql).executeQuery();
 			ArrayList<Member> members = new ArrayList<Member>();
 			while(rs.next())
 				members.add(new Member(rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6),rs.getString(7),rs.getString(8),rs.getString(9)));
