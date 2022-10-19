@@ -3,7 +3,6 @@ package twoout.miniweb.servlet;
 import java.io.IOException;
 
 import jakarta.servlet.ServletException;
-import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -16,29 +15,30 @@ public class LoginCheck extends HttpServlet {
 	public LoginCheck() {
         super();
     }
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {	
 		HttpSession hs=request.getSession();
-		Member login = MemberDAO.getMemberDAO().Login(new Member(request.getParameter("id"),request.getParameter("pw")));
-		if(login!=null) {
-			hs.setAttribute("memberID", login.getMemberID());
-			hs.setAttribute("memberPW", login.getMemberID());
-			Cookie cid=new Cookie("id",login.getMemberID());
-			Cookie cnick=new Cookie("nickname",login.getNickName());
-			
-			response.addCookie(cid);
-			response.addCookie(cnick);
-			response.sendRedirect("/miniweb");
+		String order="";
+		if(request.getParameter("order")==null)
+			order="login";
+		else
+			order=request.getParameter("order");
+		switch(order) {
+			case"logout":
+				hs.setAttribute("order",null);
+				hs.invalidate();
+				break;
+			case"login":
+				Member login = MemberDAO.getMemberDAO().Login(new Member(request.getParameter("id"),request.getParameter("pw")));
+				if(login!=null) {
+					hs.setAttribute("memberID", login.getMemberID());
+					hs.setAttribute("memberPW", login.getMemberID());
+					hs.setAttribute("nickname",login.getNickName());
+					response.sendRedirect("/miniweb/mypage.jsp");
+					return;
+				}
+				break;
 		}
-		else {
-		    Cookie[] cookies = request.getCookies();
-		    if (cookies != null) {
-		        for (int i = 0; i < cookies.length; i++) {
-		            cookies[i].setMaxAge(0);
-		            response.addCookie(cookies[i]);
-		        }
-		    }
 			response.sendRedirect("/miniweb");
-		}
 	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);

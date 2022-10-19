@@ -41,7 +41,7 @@
 </head>
 <body>
     <div class="signUp-div">
-        <form role="signUp" id="signUp" name="signUp" method="post" action="SignUp">
+        <form role="signUp" id="signUp" name="signUp" method="post" action="MemberCRUD">
             <div class="signUp-group">
                 <h2>회원 가입 정보 입력</h2>
             </div>

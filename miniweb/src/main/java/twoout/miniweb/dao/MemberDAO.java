@@ -3,6 +3,7 @@ package twoout.miniweb.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import twoout.miniweb.dto.Member;
@@ -59,5 +60,25 @@ public class MemberDAO {
 			e.printStackTrace();
 		}
 		return null;
+	}
+	synchronized public boolean IDchecked(String id) {
+		String sql="select * from member where memberid='"+id+"'";
+		try(Connection con=Connect.getInstance();ResultSet rs=con.prepareStatement(sql).executeQuery()){
+			if(rs.next())
+				return true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+	synchronized public boolean deleteID(String id) {
+		String sql="delete from member where memberid='"+id+"'";
+		try(Connection con=Connect.getInstance();){
+			if(con.prepareStatement(sql).executeUpdate()==1)
+				return true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return false;
 	}
 }

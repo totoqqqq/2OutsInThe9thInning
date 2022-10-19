@@ -10,7 +10,6 @@ let regPhone=/^01\d-\d{3,4}-\d{4}$|^01\d{8,9}/;
 //email : [영어&숫자] n글자 @ [영어&숫자] n글자+ . +[영어] 2~3글자
 let regEmail=/^[a-zA-Z\d]*@[a-zA-Z\d]*[.][a-zA-Z]{2,3}/;
 
-
 //signUp
 //kakao address
 let zipcodeBtn=document.getElementById("zipcode-btn");

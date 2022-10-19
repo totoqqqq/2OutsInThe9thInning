@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,7 +18,7 @@
             font-size: 30px;
         }
         #login-item{
-            width: 500px;
+            width: 700px;
             height: auto;
         }
         #loginBox{
@@ -26,7 +27,7 @@
             display: flex;
         }
         #loginleft{
-            width: 70%;
+            width: 60%;
             height: 100%;
         }
         .leftDiv{
@@ -34,7 +35,7 @@
             height: 50%;
         }
         #loginright{
-            width: 30%;
+            width: 20%;
             height: 100%;
         }
         .loginInput{
@@ -49,6 +50,10 @@
             font-size: 20px;
             display: block;
         }
+        #signUp-div{
+            width: 20%;
+            height: 100%;
+        }
         div{
             margin: 0px;
             padding: 0px;
@@ -57,23 +62,35 @@
 </head>
 <body>
 	<!--<a href="ExamServlet">페이지01</a> 서블릿 불러오기.-->
-    <div id="login-item">
-        <form method="post" name="login" id="loginForm" action="LoginCheck">
-            <div id="loginBox">
-                <div id="loginLeft">
-                    <div class="leftDiv">
-                        <input class="loginInput" type="text" id="id" name="id" placeholder="ID를 입력해주세요.">
+    <c:choose>
+        <c:when test="${memberID==null}">
+            <div id="login-item">
+                <form method="post" name="login" id="loginForm" action="LoginCheck">
+                    <div id="loginBox">
+                        <div id="loginLeft">
+                            <div class="leftDiv">
+                                <input class="loginInput" type="text" id="id" name="id" placeholder="ID를 입력해주세요.">
+                            </div>
+                            <div class="leftDiv">
+                                <input class="loginInput" type="password" id="pw" name="pw" placeholder="PW를 입력해주세요.">
+                            </div>
+                        </div>
+                        <div id="loginRight">
+                            <input class="loginInputR" type="submit" value="로그인">
+                        </div>
                     </div>
-                    <div class="leftDiv">
-                        <input class="loginInput" type="password" id="pw" name="pw" placeholder="PW를 입력해주세요.">
-                    </div>
-                </div>
-                <div id="loginRight">
-                    <input class="loginInputR" type="submit" value="로그인">
+                </form>
+                <div id="signUp-div">
+                    <button id = "createid-btn">회원가입</button>
                 </div>
             </div>
-        </form>
-    </div>
+        </c:when>
+    </c:choose>
+	<c:choose>
+		<c:when test="${memberID!=null}">
+			${nickname}님 환영합니다.<button id = "logout-btn">로그아웃</button>
+		</c:when>
+	</c:choose>
     <div id="loginCheck">
 
     </div>
