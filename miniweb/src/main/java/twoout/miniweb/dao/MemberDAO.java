@@ -40,7 +40,7 @@ public class MemberDAO {
 			signUp.setString(5, account.getEmail());
 			signUp.setString(6, account.getZipcode());
 			signUp.setString(7, account.getAddress());
-			signUp.setString(8, account.getBuliding());
+			signUp.setString(8, account.getBuilding());
 			signUp.executeUpdate();
 			return true;
 		} catch (Exception e) {
@@ -75,6 +75,16 @@ public class MemberDAO {
 		String sql="delete from member where memberid='"+id+"'";
 		try(Connection con=Connect.getInstance();){
 			if(con.prepareStatement(sql).executeUpdate()==1)
+				return true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+	synchronized public boolean updateID(Member member) {
+		String sql="update member set memberpw='"+member.getMemberPW()+"',nickname='"+member.getNickName()+"' ,email='"+member.getEmail()+"' ,zipcode='"+member.getZipcode()+"' ,address='"+member.getAddress()+"' ,building='"+member.getBuilding()+"' where memberid='"+member.getMemberID()+"' and phone='"+member.getPhone()+"'";
+		try(Connection con=Connect.getInstance();){
+			if(con.prepareStatement(sql).executeUpdate()==1);
 				return true;
 		} catch (SQLException e) {
 			e.printStackTrace();

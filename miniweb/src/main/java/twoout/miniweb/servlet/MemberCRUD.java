@@ -33,6 +33,26 @@ public class MemberCRUD extends HttpServlet {
 					response.sendRedirect("/miniweb/signUp.jsp");
 				break;
 			case "update":
+				if(hs.getAttribute("memberID").equals(request.getParameter("id"))&&hs.getAttribute("memberPW").toString().equals(request.getParameter("oldpw"))) {
+					if(MemberDAO.getMemberDAO().updateID(new Member(request.getParameter("id"),request.getParameter("newpw"),request.getParameter("name")
+						,request.getParameter("phone"),request.getParameter("email"),request.getParameter("zipcode"),request.getParameter("address")
+						,request.getParameter("building"),hs.getAttribute("membership").toString()))) {
+						Member login = MemberDAO.getMemberDAO().Login(new Member(hs.getAttribute("memberID").toString(),hs.getAttribute("memberPW").toString()));
+						if(login!=null) {
+							hs.setAttribute("memberID", login.getMemberID());
+							hs.setAttribute("nickName",login.getNickName());
+							hs.setAttribute("phone", login.getPhone());
+							hs.setAttribute("memberPW", login.getMemberPW());
+							hs.setAttribute("email", login.getEmail());
+							hs.setAttribute("zipcode", login.getZipcode());
+							hs.setAttribute("address", login.getAddress());
+							hs.setAttribute("building", login.getBuilding());
+							hs.setAttribute("membership", login.getMembership());
+							response.sendRedirect("/miniweb/mypage.jsp");
+						}else
+							response.sendRedirect("/miniweb/");
+					}
+				}
 				break;
 			case "delete":
 				MemberDAO.getMemberDAO().deleteID(hs.getAttribute("memberID").toString());

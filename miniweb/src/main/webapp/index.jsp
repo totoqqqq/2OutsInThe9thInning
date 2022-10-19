@@ -88,7 +88,7 @@
     </c:choose>
 	<c:choose>
 		<c:when test="${memberID!=null}">
-			${nickname}님 환영합니다.<button id = "logout-btn">로그아웃</button>
+			${nickName}님 환영합니다.<button id = "logout-btn">로그아웃</button>
 		</c:when>
 	</c:choose>
     <div id="loginCheck">

@@ -16,14 +16,14 @@ import lombok.ToString;
 @AllArgsConstructor
 public class Member {
 	@NonNull
-	String memberID;
+	private String memberID;
 	@NonNull
-	String memberPW;
-	String nickName;
-	String phone;
-	String email;
-	String zipcode;
-	String address;
-	String buliding;
-	String membership;
+	private String memberPW;
+	private String nickName;
+	private String phone;
+	private String email;
+	private String zipcode;
+	private String address;
+	private String building;
+	private String membership;
 }

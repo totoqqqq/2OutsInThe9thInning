@@ -31,8 +31,14 @@ public class LoginCheck extends HttpServlet {
 				Member login = MemberDAO.getMemberDAO().Login(new Member(request.getParameter("id"),request.getParameter("pw")));
 				if(login!=null) {
 					hs.setAttribute("memberID", login.getMemberID());
-					hs.setAttribute("memberPW", login.getMemberID());
-					hs.setAttribute("nickname",login.getNickName());
+					hs.setAttribute("nickName",login.getNickName());
+					hs.setAttribute("phone", login.getPhone());
+					hs.setAttribute("memberPW", login.getMemberPW());
+					hs.setAttribute("email", login.getEmail());
+					hs.setAttribute("zipcode", login.getZipcode());
+					hs.setAttribute("address", login.getAddress());
+					hs.setAttribute("building", login.getBuilding());
+					hs.setAttribute("membership", login.getMembership());
 					response.sendRedirect("/miniweb/mypage.jsp");
 					return;
 				}
