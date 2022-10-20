@@ -3,6 +3,7 @@ package twoout.miniweb.servlet;
 import java.io.IOException;
 
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -10,18 +11,15 @@ import jakarta.servlet.http.HttpSession;
 import twoout.miniweb.dao.MemberDAO;
 import twoout.miniweb.dto.Member;
 
+@WebServlet("*.mem")
 public class MemberCRUD extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     public MemberCRUD() {
         super();
     }
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String order;
 		HttpSession hs=request.getSession();
-		if(request.getParameter("order")==null)
-			order="create";
-		else
-			order=request.getParameter("order");
+		String order=request.getRequestURI().toString().substring(request.getRequestURI().toString().lastIndexOf("/")+1,request.getRequestURI().toString().indexOf("."));;
 		switch(order) {
 			case "create":
 				boolean signup = MemberDAO.getMemberDAO().SignUp(new Member(request.getParameter("id"),request.getParameter("pw"),request.getParameter("name")
@@ -58,6 +56,34 @@ public class MemberCRUD extends HttpServlet {
 				MemberDAO.getMemberDAO().deleteID(hs.getAttribute("memberID").toString());
 				hs.setAttribute("memberID", null);
 				hs.invalidate();
+				break;
+			case "checkid":
+				boolean check=MemberDAO.getMemberDAO().checkID(request.getParameter("checkid"));
+				request.setAttribute("checkedid",check);
+				//추후 수정
+				request.getRequestDispatcher("/miniweb/signUp.jsp").forward(request, response);
+				break;
+			case"logout":
+				hs.setAttribute("order",null);
+				hs.invalidate();
+				response.sendRedirect("/miniweb");
+				break;
+			case"login":
+				Member login = MemberDAO.getMemberDAO().Login(new Member(request.getParameter("id"),request.getParameter("pw")));
+				if(login!=null) {
+					hs.setAttribute("memberID", login.getMemberID());
+					hs.setAttribute("nickName",login.getNickName());
+					hs.setAttribute("phone", login.getPhone());
+					hs.setAttribute("memberPW", login.getMemberPW());
+					hs.setAttribute("email", login.getEmail());
+					hs.setAttribute("zipcode", login.getZipcode());
+					hs.setAttribute("address", login.getAddress());
+					hs.setAttribute("building", login.getBuilding());
+					hs.setAttribute("membership", login.getMembership());
+					response.sendRedirect("/miniweb/mypage.jsp");
+					return;
+				}
+				response.sendRedirect("/miniweb");
 				break;
 		}
 	}

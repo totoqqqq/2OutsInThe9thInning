@@ -61,16 +61,6 @@ public class MemberDAO {
 		}
 		return null;
 	}
-	synchronized public boolean IDchecked(String id) {
-		String sql="select * from member where memberid='"+id+"'";
-		try(Connection con=Connect.getInstance();ResultSet rs=con.prepareStatement(sql).executeQuery()){
-			if(rs.next())
-				return true;
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return false;
-	}
 	synchronized public boolean deleteID(String id) {
 		String sql="delete from member where memberid='"+id+"'";
 		try(Connection con=Connect.getInstance();){
@@ -88,6 +78,17 @@ public class MemberDAO {
 				return true;
 		} catch (SQLException e) {
 			e.printStackTrace();
+		}
+		return false;
+	}
+	synchronized public boolean checkID(String id) {
+		String sql="select * from member where memberid='"+id+"'";
+		try(Connection con=Connect.getInstance();ResultSet rs=con.prepareStatement(sql).executeQuery()){
+			if(rs.next())
+				return false;
+			else
+				return true;
+		} catch (SQLException e) {
 		}
 		return false;
 	}

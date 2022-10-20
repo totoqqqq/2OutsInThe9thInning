@@ -1,5 +1,5 @@
 $("#logout-btn").on("click",function(){
-    $.post("LoginCheck",{order:"logout"});
+    $.post("logout.mem");
     location.replace("/miniweb");
 })
 $("#createid-btn").on("click",function(){

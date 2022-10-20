@@ -24,11 +24,11 @@ zipcodeBtn.onclick=function(){
 }
 let editId=true;
 $("#logout-btn").on("click",function(){
-    $.post("LoginCheck",{order:"logout"});
+    $.post("logout.mem");
     location.replace("/miniweb");
 })
 $("#removeid-btn").on("click",function(){
-    $.post("MemberCRUD",{order:"delete"});
+    $.post("delete.mem");
     location.replace("/miniweb");
 })
 $("#editid-btn").on("click",function(){

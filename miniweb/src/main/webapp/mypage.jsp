@@ -53,7 +53,7 @@
 	    <button id = "removeid-btn">회원탈퇴</button>
     </div>
         <div class="signUp-div">
-            <form role="signUp" id="signUp" name="signUp" method="post" action="MemberCRUD">
+            <form role="signUp" id="signUp" name="signUp" method="post" action="update.mem">
                 <div class="signUp-group">
                     <h2>회원 정보 수정</h2>
                 </div>
@@ -136,9 +136,13 @@
                         <input class="signUp-control btn btn-sm btn-outline-danger" id="cancel-btn" type="button" value="수정취소">
                     </div>
                 </div>
-                <input type="hidden" name="order" value="update">
             </form>
         </div>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+    <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+	<script src="mypage.js"></script>
     <script>
         $("#id-text").val("${memberID}");
         $("#id-text").attr("readonly","true");
@@ -158,12 +162,9 @@
             $("#zipcode-text").val("${zipcode}");
             $("#address-text").val("${address}");
             $("#building-text").val("${building}");
+            $(".signUp-div").prop("style","display:none");
+    	    editId=true;
         })
     </script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
-    <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-	<script src="mypage.js"></script>
 </body>
 </html>

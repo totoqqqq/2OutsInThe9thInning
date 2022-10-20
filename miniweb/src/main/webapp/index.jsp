@@ -62,35 +62,26 @@
 </head>
 <body>
 	<!--<a href="ExamServlet">페이지01</a> 서블릿 불러오기.-->
-    <c:choose>
-        <c:when test="${memberID==null}">
-            <div id="login-item">
-                <form method="post" name="login" id="loginForm" action="LoginCheck">
-                    <div id="loginBox">
-                        <div id="loginLeft">
-                            <div class="leftDiv">
-                                <input class="loginInput" type="text" id="id" name="id" placeholder="ID를 입력해주세요.">
-                            </div>
-                            <div class="leftDiv">
-                                <input class="loginInput" type="password" id="pw" name="pw" placeholder="PW를 입력해주세요.">
-                            </div>
-                        </div>
-                        <div id="loginRight">
-                            <input class="loginInputR" type="submit" value="로그인">
-                        </div>
-                    </div>
-                </form>
-                <div id="signUp-div">
-                    <button id = "createid-btn">회원가입</button>
-                </div>
-            </div>
-        </c:when>
-    </c:choose>
-	<c:choose>
-		<c:when test="${memberID!=null}">
-			${nickName}님 환영합니다.<button id = "logout-btn">로그아웃</button>
-		</c:when>
-	</c:choose>
+	<div id="login-item">
+	    <form method="post" name="login" id="loginForm" action="login.mem">
+	        <div id="loginBox">
+	            <div id="loginLeft">
+	                <div class="leftDiv">
+	                    <input class="loginInput" type="text" id="id" name="id" placeholder="ID를 입력해주세요.">
+	                </div>
+	                <div class="leftDiv">
+	                    <input class="loginInput" type="password" id="pw" name="pw" placeholder="PW를 입력해주세요.">
+	                </div>
+	            </div>
+	            <div id="loginRight">
+	                <input class="loginInputR" type="submit" value="로그인">
+	            </div>
+	        </div>
+	    </form>
+	    <div id="signUp-div">
+	        <button id = "createid-btn">회원가입</button>
+	    </div>
+	</div>
     <div id="loginCheck">
 
     </div>
