@@ -62,8 +62,8 @@
             <td width="5%">조회</td>
         </tr>        
         <tr>
-            <td colspan=5 align="center">
-                ${navi}
+            <td id=navi-td colspan=5 align="center">
+                
             </td>
         </tr>
         <tr>

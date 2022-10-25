@@ -9,16 +9,6 @@
   </resource-ref>
   <servlet>
     <description></description>
-    <display-name>LoginCheck</display-name>
-    <servlet-name>LoginCheck</servlet-name>
-    <servlet-class>twoout.miniweb.servlet.LoginCheck</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>LoginCheck</servlet-name>
-    <url-pattern>/LoginCheck</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <description></description>
     <display-name>MemberCRUD</display-name>
     <servlet-name>MemberCRUD</servlet-name>
     <servlet-class>twoout.miniweb.servlet.MemberCRUD</servlet-class>

@@ -1,4 +1,5 @@
 $("#create-btn").on("click",function(){
-	$.post("create.board",{title:$("#title").text(),contents:$("#contents").text()});
-	location.replace("board.jsp");
-})
+	$("#title-hidden").val($("#title").text());			
+	$("#content-hidden").val($("#contents").text());
+	$("#data-form").submit();
+	});
