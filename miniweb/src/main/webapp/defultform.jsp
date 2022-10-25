@@ -18,6 +18,24 @@
             font-family: 'Dongle', sans-serif;
             font-size: 20px;
         }
+        *{box-sizing:border-box;}
+		table {
+			width: 300px;
+		}
+		
+		table #meta {
+			font-size: 8px;
+		}
+		
+		table #contents {
+			height: 200px;
+			overflow-y: auto;
+		}
+		table textarea{
+			width:100%;
+			height:100%;
+		}
+		#title{border:none;}
     </style>
 </head>
 <body>

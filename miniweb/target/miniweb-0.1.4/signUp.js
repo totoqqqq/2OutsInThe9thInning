@@ -79,8 +79,14 @@ signUp.onsubmit=function(){
                 pw.focus();
         });
     }
+    if(!(check==f)){
+        checkfails(id);
+	    $("#id-text").attr("readonly","false");
+	    return false;
+}
     if(!(regId.test(id.value))){
         checkfails(id);
+        $("#id-text").attr("readonly","false");
         return false;
     }
     if(!(regPw.test(pw.value))){
@@ -112,3 +118,15 @@ signUp.onsubmit=function(){
         return false;
     }
 }
+
+let check='f';
+$("#id-btn").on("click",function(){
+    $.get("checkid.mem",{"checkid":$("#id-text").val()},function(check) {
+        if(check=='t'){
+            $("#id-span").html("사용 가능한 아이디입니다.");
+            $("#id-text").attr("readonly","true");
+        }else if(check=='f'){
+            $("#id-span").html("사용 불가능한 아이디입니다.");
+        }g
+    });
+});

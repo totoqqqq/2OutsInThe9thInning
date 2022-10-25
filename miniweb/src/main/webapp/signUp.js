@@ -9,6 +9,8 @@ let regName=/^(?=.*[가-힣a-zA-z\d])[가-힣a-zA-z\d]{4,15}$/;
 let regPhone=/^01\d-\d{3,4}-\d{4}$|^01\d{8,9}/;
 //email : [영어&숫자] n글자 @ [영어&숫자] n글자+ . +[영어] 2~3글자
 let regEmail=/^[a-zA-Z\d]*@[a-zA-Z\d]*[.][a-zA-Z]{2,3}/;
+let checked='f';
+
 
 //signUp
 //kakao address
@@ -79,8 +81,9 @@ signUp.onsubmit=function(){
                 pw.focus();
         });
     }
-    if(!(regId.test(id.value))){
+    if(!(regId.test(id.value))||checked=='f'){
         checkfails(id);
+        $("#id-text").attr("readonly",false);
         return false;
     }
     if(!(regPw.test(pw.value))){
@@ -112,3 +115,15 @@ signUp.onsubmit=function(){
         return false;
     }
 }
+
+$("#id-btn").on("click",function(){
+    $.get("checkid.mem",{"checkid":$("#id-text").val()},function(check) {
+		checked=check;
+        if(check=='t'){
+            $("#id-span").html("사용 가능한 아이디입니다.");
+            $("#id-text").attr("readonly",true);
+        }else if(check=='f'){
+            $("#id-span").html("사용 불가능한 아이디입니다.");
+        }
+    });
+});

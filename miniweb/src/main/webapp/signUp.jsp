@@ -135,18 +135,5 @@
     <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="signUp.js"></script>
-    <script>
-    let check;
-    $("#id-btn").on("click",function(){
-        $.post("checkid.mem",{"checkid":$("#id-text").val()});
-        alert("${checkedid}");
-        if(check){
-			$("#id-span").html("사용 가능한 아이디입니다.");
-			$("#id-span").attr("readonly","true");
-        }else{
-        	$("#id-span").html("사용 불가능한 아이디입니다.");
-        }
-    });
-    </script>
 </body>
 </html>

@@ -48,6 +48,7 @@
         ${nickName}님 환영합니다.<br>
     </div>
     <div>
+        <button id = "freeboard-btn">자유게시판</button>
 	    <button id = "logout-btn">로그아웃</button>
 	    <button id = "editid-btn">회원수정</button>
 	    <button id = "removeid-btn">회원탈퇴</button>

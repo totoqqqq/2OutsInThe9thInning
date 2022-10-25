@@ -6,7 +6,7 @@
 
   <groupId>twoout</groupId>
   <artifactId>miniweb</artifactId>
-  <version>0.1.4</version>
+  <version>0.2.0</version>
   <packaging>war</packaging>
 
   <name>miniweb</name>
@@ -20,6 +20,11 @@
   </properties>
 
   <dependencies>
+  	<dependency>
+	    <groupId>com.googlecode.json-simple</groupId>
+	    <artifactId>json-simple</artifactId>
+	    <version>1.1.1</version>
+	</dependency>
 	<dependency>
 	    <groupId>com.fasterxml.jackson.core</groupId>
 	    <artifactId>jackson-databind</artifactId>
@@ -94,6 +99,11 @@
 		<groupId>taglibs</groupId>
 		<artifactId>standard</artifactId>
 		<version>1.1.2</version>
+	</dependency>
+	<dependency>
+	    <groupId>jakarta.json</groupId>
+	    <artifactId>jakarta.json-api</artifactId>
+	    <version>2.1.0</version>
 	</dependency>
   </dependencies>
   <build>

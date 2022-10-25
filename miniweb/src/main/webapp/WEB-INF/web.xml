@@ -19,26 +19,6 @@
   </servlet-mapping>
   <servlet>
     <description></description>
-    <display-name>MembersView</display-name>
-    <servlet-name>MembersView</servlet-name>
-    <servlet-class>twoout.miniweb.servlet.MembersView</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>MembersView</servlet-name>
-    <url-pattern>/MembersView</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <description></description>
-    <display-name>IdCheck</display-name>
-    <servlet-name>IdCheck</servlet-name>
-    <servlet-class>twoout.miniweb.servlet.IdCheck</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>IdCheck</servlet-name>
-    <url-pattern>/IdCheck</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <description></description>
     <display-name>MemberCRUD</display-name>
     <servlet-name>MemberCRUD</servlet-name>
     <servlet-class>twoout.miniweb.servlet.MemberCRUD</servlet-class>

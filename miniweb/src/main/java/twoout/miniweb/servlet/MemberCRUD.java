@@ -59,9 +59,10 @@ public class MemberCRUD extends HttpServlet {
 				break;
 			case "checkid":
 				boolean check=MemberDAO.getMemberDAO().checkID(request.getParameter("checkid"));
-				request.setAttribute("checkedid",check);
-				//추후 수정
-				request.getRequestDispatcher("/miniweb/signUp.jsp").forward(request, response);
+				if(check)
+					response.getWriter().append('t');
+				else
+					response.getWriter().append('f');
 				break;
 			case"logout":
 				hs.setAttribute("order",null);
@@ -86,6 +87,9 @@ public class MemberCRUD extends HttpServlet {
 				response.sendRedirect("/miniweb");
 				break;
 		}
+	}
+	public String idcheck(String id) {
+		return id;
 	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);

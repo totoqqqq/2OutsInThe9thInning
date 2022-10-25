@@ -23,6 +23,10 @@ zipcodeBtn.onclick=function(){
     }).open();
 }
 let editId=true;
+
+$("#freeboard-btn").on("click",function(){
+    location.replace("board.jsp");
+})
 $("#logout-btn").on("click",function(){
     $.post("logout.mem");
     location.replace("/miniweb");

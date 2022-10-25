@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %> 
 <!DOCTYPE html>
 <html>
 <head>
@@ -49,38 +50,28 @@
     </style>
 </head>
 <body>
-    <div>
-        ${nickName}님 환영합니다.<br>
-    </div>
-    <div class="postbg">
-        <div class="row posttype">
-            <div class="col-2 postno">
-                번호
-            </div>
-            <div class="col-5 postname">
-                게시글제목
-            </div>
-            <div class="col-3 postid">
-                작성자
-            </div>
-            <div class="col-2 postdate">
-                작성일
-            </div>
-        </div>
-        <div class="row post">
-            
-        </div>
-        <div class="row postcontrol">
-            <div class="col-7 botton1">
-                ◁ 1 ▷
-            </div>
-            <div class="col-5 botton2">
-                <button type="button" class="btn btn-sm btn-outline-primary">Write</button>
-                <button type="button" class="btn btn-sm btn-outline-success">Edit</button>
-                <button type="button" class="btn btn-sm btn-outline-danger">Delete</button>
-            </div>
-        </div>
-    </div>
+	<table border="1" align="center" width="800px">
+        <tr>
+            <th colspan="5">자유게시판 ${nickName}님 환영합니다.</th>
+        </tr>
+        <tr id="checktable">
+            <td width="5%"></td>
+            <td width="60%" align="center">제목</td>
+            <td width="15%" align="center">작성자</td>
+            <td width="15%" align="center">날짜</td>
+            <td width="5%">조회</td>
+        </tr>        
+        <tr>
+            <td colspan=5 align="center">
+                ${navi}
+            </td>
+        </tr>
+        <tr>
+            <td colspan=5 align="right">
+                <button id=boardwriter-btn>작성하기</button>
+            </td>
+        </tr>
+    </table>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
     <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
