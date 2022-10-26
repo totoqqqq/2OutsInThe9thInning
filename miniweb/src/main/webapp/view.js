@@ -1,9 +1,9 @@
 let edited=true;
-$("#delete-btn").on("click",function(){
+$(".delete-btn").on("click",function(){
     $.get("delete.board"+window.location.search);
     location.replace("/miniweb/board.jsp");
 });
-$("#edit-btn").on("click",function(){
+$(".edit-btn").on("click",function(){
     if(edited){
 		alert("내용을 직접 수정해주세요.");
         edited=false;
@@ -15,6 +15,14 @@ $("#edit-btn").on("click",function(){
         location.reload();
     }
 });
+
 $("#back-btn").on("click",function(){
     location.replace("/miniweb/board.jsp");
+});
+$("#replyinput-btn").on("click",function(){
+	$.get("replyinput.board"+window.location.search,{boardreplyinput:$("#replyinput-table").text()});
+	location.reload();	
+});
+$(".download-btn").on("click",function(){
+	$.get("download.board"+window.location.search,{realName:$(this).val(),vmName:$(this).attr("id")});
 });

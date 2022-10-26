@@ -19,6 +19,9 @@
             font-size: 20px;
             color:black;
         }
+        #filelist-span{
+        	font-size: 8px
+        }
         #board-item{
             width: 700px;
             height: 600px;
@@ -68,7 +71,8 @@
 				<form action="create.board" method="post" enctype="multipart/form-data" id="data-form">
 					<input type="hidden" id="title-hidden" name="title">
 					<input type="hidden" id="content-hidden" name="contents">
-					<input type="file" class="btn file-btn" name="file">
+					<input type="file" id="files-input"class="btn file-btn" name="file" multiple>
+					<span id="filelist-span"></span>
 					<input type="button" id="create-btn" value="작성">
 					<button type="button" id="back-btn">목록으로</button>
 				</form>

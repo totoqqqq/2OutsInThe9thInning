@@ -1,5 +1,7 @@
 package twoout.miniweb.dto;
 
+import java.sql.Timestamp;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,9 +16,12 @@ import lombok.ToString;
 @NoArgsConstructor
 @RequiredArgsConstructor
 @AllArgsConstructor
-public class BoardFile {
+public class BoardReply {
 	@NonNull
-	private String realName;
-	private String vmName;
+	private String replayContent;
+	private Timestamp createdate;
+	@NonNull
+	private String memberID;
+	@NonNull
 	private String boardID;
 }
