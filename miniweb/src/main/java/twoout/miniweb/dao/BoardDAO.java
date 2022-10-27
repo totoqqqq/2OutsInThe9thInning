@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 
 import twoout.miniweb.dto.Board;
@@ -61,8 +62,7 @@ public class BoardDAO {
 		try(Connection con=Connect.getInstance();PreparedStatement ps=con.prepareStatement(sql);ResultSet rs=ps.executeQuery();){
 			int boardCount=1;
 			if(rs.next())
-			boardCount=Integer.parseInt(rs.getString(1));
-			System.out.println(boardCount);
+			boardCount=(Integer.parseInt(rs.getString(1)))-((Integer.parseInt(page)-1)*10);
 			sql="select memberid,boardid,boardtitle,boardcontent,createdate,viewcount from(select rownum as rum, memberid,boardid,boardtitle,boardcontent,createdate,viewcount from(select * from board order by createdate))where rum>="+boardCount+"-9 and rum<="+boardCount;
 			try(PreparedStatement innerPs=con.prepareStatement(sql);ResultSet innerRs=innerPs.executeQuery();){
 				ArrayList<Board> list = new ArrayList<Board>();
@@ -76,6 +76,16 @@ public class BoardDAO {
 			e1.printStackTrace();
 		}
 		return null;
+	}
+	synchronized public static int listBoardPage() {
+		String sql="select count(*) from board";
+		try(Connection con=Connect.getInstance();PreparedStatement ps=con.prepareStatement(sql);ResultSet rs=ps.executeQuery();){
+			if(rs.next())
+				return (Integer.parseInt(rs.getString(1))+9)/10;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return 1;
 	}
 	synchronized public static Board viewBoard(String boardID) {
 		String sql="update board set viewcount = viewcount + 1 where boardid='"+boardID+"'";
@@ -109,7 +119,7 @@ public class BoardDAO {
 		return null;
 	}
 	synchronized public static ArrayList<BoardReply> viewBoardReply(String boardID){
-		String sql="select * from boardreply where boardID='"+boardID+"'";
+		String sql="select * from boardreply where boardID='"+boardID+"' order by createdate asc";
 		ArrayList<BoardReply> reply=new ArrayList<BoardReply>();
 		try(Connection con=Connect.getInstance();PreparedStatement ps=con.prepareStatement(sql);ResultSet rs=ps.executeQuery();){
 			if(rs.next()) {
@@ -133,8 +143,28 @@ public class BoardDAO {
 		}
 		return false;
 	}
+	synchronized public static boolean deleteBoardReply(Timestamp createdate,String memberID) {
+		String sql="delete from boardreply where createdate='"+createdate+"' and memberid='"+memberID+"'";
+		try(Connection con=Connect.getInstance();PreparedStatement ps=con.prepareStatement(sql);){
+			if(ps.executeUpdate()==1)
+				return true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
 	synchronized public static boolean updateBoard(String boardID,String memberID, String boardTitle, String boardContent) {
 		String sql="update board set boardtitle='"+boardTitle+"', boardcontent='"+boardContent+"' where boardid='"+boardID+"' and memberid='"+memberID+"'";
+		try(Connection con=Connect.getInstance();PreparedStatement ps=con.prepareStatement(sql);){
+			if(ps.executeUpdate()==1)
+				return true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+	synchronized public static boolean updateBoardReply(Timestamp createdate,String replayContent,String memberID) {
+		String sql="update boardreply set replyContent='"+replayContent+"' where createdate='"+createdate+"' and memberid='"+memberID+"'";
 		try(Connection con=Connect.getInstance();PreparedStatement ps=con.prepareStatement(sql);){
 			if(ps.executeUpdate()==1)
 				return true;

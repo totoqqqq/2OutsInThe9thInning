@@ -99,21 +99,28 @@
 				<button type=button id="back-btn">목록으로</button>
 		</tr>
 	</table>
-	<table id="replytable" border=1 align=center>
-		<tr id=>
-			<td colspan=6 id="replyinput-table" contenteditable="true" placeholder="댓글을 입력해주세요."></td>
-			<td><button type=button id="replyinput-btn">댓글 입력</button></td>
-		</tr>
-	</table>
+	<c:if test="${memberID ne null}">
+		<table id="replytable" border=1 align=center>
+			<tr id=>
+				<td colspan=6 id="replyinput-table" contenteditable="true" placeholder="댓글을 입력해주세요."></td>
+				<td><button type=button id="replyinput-btn">댓글 입력</button></td>
+			</tr>
+		</table>
+	</c:if>>
 	<c:if test="${boardReplyData ne null}">
 		<table id="replylisttable" border=1 align=center>
 			<c:forEach var="i" items="${boardReplyData}" begin="0" end="${fn:length(boardReplyData)}" step="1" varStatus="status">
 			<tr>
-				<td colspan=6 class="replylist-table" placeholder="댓글을 수정해주세요."></td>
+				<td colspan=4 class="replylist-table" placeholder="댓글을 수정해주세요.">${i.replayContent}</td>
+				<td colspan=1 class="replymember-table">${i.memberID}</td>
+				<c:set var = "string" value = "${i.createdate}"/>
+				<td colspan=1 class="replydate-table">${fn:substring(string,2,16)}</td>
+				<c:if test="${i.memberID == memberID}">
 				<td>
-					<button type=button class="replyedit-btn">수정</button>
-					<button type=button class="replyedel-btn">삭제</button>
+					<button type=button class="replyedit-btn" value="${i.createdate}">수정</button>
+					<button type=button class="replyedel-btn" value="${i.createdate}">삭제</button>
 				</td>
+				</c:if>
 			</tr>
 			</c:forEach>
 		</table>

@@ -6,6 +6,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintWriter;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.UUID;
@@ -68,13 +69,18 @@ public class BoardCRUD extends HttpServlet {
 			}
 			else if(hs.getAttribute("memberID")!=null)
 				BoardDAO.createBoard(new Board(hs.getAttribute("memberID").toString(),request.getParameter("title"),request.getParameter("contents")));
-			response.sendRedirect("board.jsp");
+			response.sendRedirect("board.jsp?page=1");
 			break;
 		case "list":
 			String page=request.getParameter("page");
 			ArrayList<Board> list = BoardDAO.listBoard(page);
 			try(PrintWriter pw=response.getWriter();){
 				pw.print(new Gson().toJson(list));
+			}
+			break;
+		case "listpage":
+			try(PrintWriter pw=response.getWriter();){
+				pw.print(new Gson().toJson(BoardDAO.listBoardPage()));
 			}
 			break;
 		case "view":
@@ -96,6 +102,12 @@ public class BoardCRUD extends HttpServlet {
 			break;
 		case "replyinput":
 			BoardDAO.createReply(new BoardReply(request.getParameter("boardreplyinput"),hs.getAttribute("memberID").toString(),request.getParameter("boardIDs")));
+			break;
+		case "replydelete":
+			BoardDAO.deleteBoardReply(Timestamp.valueOf(request.getParameter("createdate")),hs.getAttribute("memberID").toString());
+			break;
+		case "replyupdate":
+			BoardDAO.updateBoardReply(Timestamp.valueOf(request.getParameter("createdate")),request.getParameter("replayContent"),hs.getAttribute("memberID").toString());
 			break;
 		case "download":
 			String downPath=BoardDAO.checkDownload(new BoardFile(request.getParameter("realName"),request.getParameter("vmName"),request.getParameter("boardIDs")));
