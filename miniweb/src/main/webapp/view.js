@@ -1,9 +1,9 @@
 let edited=true;
-$(".delete-btn").on("click",function(){
+$("#delete-btn").on("click",function(){
     $.get("delete.board"+window.location.search);
     location.replace("/miniweb/board.jsp?page=1");
 });
-$(".edit-btn").on("click",function(){
+$("#edit-btn").on("click",function(){
     if(edited){
 		alert("내용을 직접 수정해주세요.");
         edited=false;

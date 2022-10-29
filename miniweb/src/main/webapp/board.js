@@ -31,7 +31,6 @@ $(window).on("load",function(){
 });
 
 $(document).on("click",".listpage-btn",function(){
-	
 	location.replace("board.jsp?page="+$(this).attr("id").toString().substring(0,$(this).attr("id").toString().indexOf("-")));
 });
 $(document).on("click","#leftlist-btn",function(){
